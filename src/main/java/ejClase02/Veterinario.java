@@ -4,6 +4,7 @@
  */
 package ejClase02;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -22,35 +23,57 @@ public class Veterinario {
     public static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int numAnimales = pedirNumerosAnimales();
-        double[] pesoAnimales = new double[numAnimales];
-        String[] nombreArray = new String[numAnimales];
+        int numAnimales = pedirNumerosAnimales();//Creo una variable y le añado el nº de animales
+        double[] pesoAnimales = new double[numAnimales];//Creo un array double y le añado el nº de animales
+        String[] nombreArray = new String[numAnimales];//Creo un array String y le añado el nº de animales
         nombreAnimales(nombreArray);
         pesoAnimales(pesoAnimales);
         mostrarAnimales(pesoAnimales, nombreArray);
         mediaPesoAnimales(pesoAnimales, numAnimales);
-
     }
 
+    //Pido por teclado el número de animales
     public static int pedirNumerosAnimales() {
-        System.out.println("Introduce el número de animales que van ha ser"
-                + " evaluados: ");
-        int numAnimales = teclado.nextInt();
+        boolean repetir = true;
+        int numAnimales = 0;
+        do {
+            System.out.println("Introduce el número de animales que van ha ser"
+                    + " evaluados: ");
+            try {
+                numAnimales = teclado.nextInt();
+                repetir = false;
+            } catch (InputMismatchException ime) {
+                System.out.println("Debe de introducir números enteros ");
+                teclado.nextLine();
+            }
+        } while (repetir);
         return numAnimales;
     }
 
-    public static double[] pesoAnimales(double[] array) {
-        double pesoAnimal = 0, mediaPesos = 0, sumaPesos = 0;
+    //Segun el nº de animales que haya se le pide 1 a 1 el peso
+    public static double[] pesoAnimales(double[] array) {//Pido un array
+        boolean repetir = true;
+        double pesoAnimal = 0;
         for (int i = 0; i < array.length; i++) {
-            System.out.println("Introduce el peso del " + (i + 1) + "º animal");
-            pesoAnimal = teclado.nextDouble();
-            array[i] = pesoAnimal;
+            do {
+                System.out.println("Introduce el peso del " + (i + 1) + "º animal");
+                try {
+                    pesoAnimal = teclado.nextDouble();
+                    pesoAnimal = Math.abs(pesoAnimal);
+                    repetir = false;
+                } catch (InputMismatchException ime) {
+                    System.out.println("Debe de introducir válores correctos ");
+                    teclado.nextLine();
+                }
+            } while (repetir);
+            array[i] = pesoAnimal;//Meto el peso del animal en el array y lo devuelvo
         }
         return array;
     }
 
     public static String[] nombreAnimales(String[] array) {
         String nombre = " ";
+        boolean repetir = true;
         teclado.nextLine();
         for (int i = 0; i < array.length; i++) {
             System.out.println("Dime el nombre del " + (i + 1) + "º animal");
@@ -63,8 +86,8 @@ public class Veterinario {
     public static void mediaPesoAnimales(double[] peso, int numAnimales) {
         double pesoTotal = 0, mediaPeso;
         for (int i = 0; i < peso.length; i++) {
-            pesoTotal = peso[i];
-            pesoTotal += pesoTotal;
+            pesoTotal = peso[i];//Meto en pesoTotal el valor del array de peso[i]
+            pesoTotal += pesoTotal;//Sumo el total
         }
         mediaPeso = pesoTotal / numAnimales;
         System.out.println("\nLa media del peso es de: " + pesoTotal + "Kg");
