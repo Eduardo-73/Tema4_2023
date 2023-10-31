@@ -4,31 +4,35 @@
  */
 package ejClase01;
 
+import java.util.Random;
+
 /**
  *
  * @author eduar
  */
 public class Utilidades {
 
-    public static boolean[] arraysBooleano() {
+    public static boolean[] arraysBooleano(int tamanio) {
         int contadorCruz = 0, contadorCara = 0;
-        int tamanio = 2000000;
         boolean[] caraCruz = new boolean[tamanio];
-        for (int i = 0; i < tamanio; i++) {
-            if (i % 2 == 0) {
-                caraCruz[i] = true;
+        for (int i = 0; i < caraCruz.length; i++) {
+            if (caraCruz[i] = new Random().nextBoolean()) {
                 contadorCara++;
             } else {
-                caraCruz[i] = false;
                 contadorCruz++;
             }
         }
-        for (int i = 0; i < tamanio; i++) {
+        for (int i = 0; i < caraCruz.length; i++) {
             System.out.println(caraCruz[i] ? "Cara" : "Cruz");
         }
         System.out.println("""
+                           -------------------------
+                            Contador de Cara y Cruz
+                           -------------------------
                             Cara: %d 
+                           
                             Cruz: %d
+                           _________________________
                              """.formatted(contadorCara,
                 contadorCruz));
         return caraCruz;
