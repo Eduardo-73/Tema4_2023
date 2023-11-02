@@ -29,7 +29,8 @@ public class Veterinario {
         nombreAnimales(nombreArray);
         pesoAnimales(pesoAnimales);
         mostrarAnimales(pesoAnimales, nombreArray);
-        mediaPesoAnimales(pesoAnimales, numAnimales);
+        double mediaAnimales = mediaPesoAnimales(pesoAnimales);
+        encimaMedia(pesoAnimales, mediaAnimales, nombreArray);
     }
 
     //Pido por teclado el número de animales
@@ -54,6 +55,7 @@ public class Veterinario {
     public static double[] pesoAnimales(double[] array) {//Pido un array
         boolean repetir = true;
         double pesoAnimal = 0;
+        System.out.println("Ahora tienes que introducir el peso ");
         for (int i = 0; i < array.length; i++) {
             do {
                 System.out.println("Introduce el peso del " + (i + 1) + "º animal");
@@ -83,24 +85,31 @@ public class Veterinario {
         return array;
     }
 
-    public static void mediaPesoAnimales(double[] peso, int numAnimales) {
+    public static double mediaPesoAnimales(double[] peso) {
         double pesoTotal = 0, mediaPeso;
         for (int i = 0; i < peso.length; i++) {
-            pesoTotal = peso[i];//Meto en pesoTotal el valor del array de peso[i]
-            pesoTotal += pesoTotal;//Sumo el total
+            pesoTotal += peso[i];//Meto en pesoTotal el valor del array de peso[i]
         }
-        mediaPeso = pesoTotal / numAnimales;
-        System.out.println("\nLa media del peso es de: " + pesoTotal + "Kg");
+        mediaPeso = pesoTotal / peso.length;
+        System.out.printf("\nLa media del peso es de: %.2fKg\n", mediaPeso);
+        return mediaPeso;
+    }
+
+    public static void encimaMedia(double[] peso, double media, String[] nombre) {
+        for (int i = 0; i < peso.length; i++) {
+            if (peso[i] > media) {
+                System.out.println("El animal con el nombre: " + nombre[i]
+                        + " esta por encima de la media");
+            } else {
+                System.out.println("El animal con el nombre: " + nombre[i]
+                        + " esta por debajo de la media");
+            }
+        }
     }
 
     public static void mostrarAnimales(double[] peso, String[] nombre) {
-
         for (int i = 0; i < nombre.length; i++) {
-            System.out.print(nombre[i] + " - ");
-        }
-        System.out.println(" ");
-        for (int i = 0; i < peso.length; i++) {
-            System.out.print(peso[i] + "Kg" + " - ");
+            System.out.println("Nombre: " + nombre[i] + " Peso: " + peso[i] + "kg");
         }
     }
 }
