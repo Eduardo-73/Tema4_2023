@@ -38,14 +38,17 @@ public class CuentaBancaria {
         this.saldo += cantidadIngresar;
     }
 
-    public void retirar(double cantidadRetirar) {
-        if (this.saldo > cantidadRetirar) {
+    public boolean retirar(double cantidadRetirar) {
+        boolean retirar = false;
+        if (this.saldo >= cantidadRetirar) {
             this.saldo -= cantidadRetirar;
+            retirar = true;
         }
+        return retirar;
     }
 
-    public void abonarIntereses(double interes) {
-        this.saldo *= interes;
+    public void abonarIntereses() {
+        this.saldo += this.saldo *= this.interesMensual;
     }
 
     // Get y Set

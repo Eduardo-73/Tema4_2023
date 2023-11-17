@@ -27,7 +27,10 @@ public class Cuenta {
         c1.retirar(250);
         System.out.println(c1);
         // Incremento el interes
-        c1.abonarIntereses(0.7);
+        c1.abonarIntereses();
         System.out.println(c1);
+        System.out.println("-------------------------");
+        CuentaBancaria c2 = new CuentaBancaria();// Creo una nueva Cuenta con el constructor sin parametros
+        System.out.println(c2);
     }
 }
