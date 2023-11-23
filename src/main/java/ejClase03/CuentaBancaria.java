@@ -24,6 +24,14 @@ public class CuentaBancaria {
     public CuentaBancaria() {
         this.numCuenta = RandomStringUtils.randomNumeric(DIGITOS_CUENTA);
     }
+    
+    public CuentaBancaria(CuentaBancaria cuenta){
+        this.numCuenta = cuenta.getNumCuenta();
+        this.nombre = cuenta.getNombre();
+        this.NIF = cuenta.getNIF();
+        this.saldo = cuenta.getSaldo();
+        this.interesMensual = cuenta.getInteresMensual();
+    }
 
     public CuentaBancaria(String nombre, String NIF, double saldo, double interesMensual) {
         this.numCuenta = RandomStringUtils.randomNumeric(DIGITOS_CUENTA);

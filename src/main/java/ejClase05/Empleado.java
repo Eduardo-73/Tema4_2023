@@ -4,12 +4,16 @@
  */
 package ejClase05;
 
+import java.util.Random;
+import org.apache.commons.lang3.RandomStringUtils;
+
 /**
  *
  * @author edu
  */
 public class Empleado {
 
+    public static Random rd = new Random();
     // Atributos encapsulados
     private String nombre;
     private String nif;
@@ -18,6 +22,17 @@ public class Empleado {
     private IRPF irpf;
     private boolean casado;
     private int numHijos;
+
+    //Constructor copia
+    public Empleado(Empleado emp) {
+        this.nombre = RandomStringUtils.random(7, "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ");
+        this.nif = RandomStringUtils.random(10);
+        this.sueldoBase = rd.nextDouble(1000, 1500);
+        this.cantidadAbonarHoras = rd.nextDouble(50, 50);
+        this.irpf = emp.getIrpf();
+        this.casado = rd.nextBoolean();
+        this.numHijos = rd.nextInt(1, 10);
+    }
 
     // Constructor
     public Empleado(String nombre, String nif, double sueldoBase,
