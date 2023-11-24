@@ -4,6 +4,7 @@
  */
 package ejClase05;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -22,16 +23,26 @@ public class Empleado {
     private IRPF irpf;
     private boolean casado;
     private int numHijos;
+    String[] nombres = {"Pepe", "Pepa", "Antonio", "Antonia", "Manuel",
+        "Manuela", "Victor", "Victoria", "Frederica", "Alfredo"};
+    int numRD = rd.nextInt(1, 4);
 
     //Constructor copia
-    public Empleado(Empleado emp) {
-        this.nombre = RandomStringUtils.random(7, "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ");
-        this.nif = RandomStringUtils.random(10);
-        this.sueldoBase = rd.nextDouble(1000, 1500);
-        this.cantidadAbonarHoras = rd.nextDouble(50, 50);
-        this.irpf = emp.getIrpf();
-        this.casado = rd.nextBoolean();
-        this.numHijos = rd.nextInt(1, 10);
+    public Empleado() {
+        this.nombre = listaNombres(nombres);
+        this.nif = RandomStringUtils.random(9, "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+                + "123456789");
+        this.sueldoBase = sueldoRandom();
+        this.cantidadAbonarHoras = horasRandom();
+        if (numRD == 1) {
+            this.irpf = IRPF.OCHO;
+        } else if (numRD == 2) {
+            this.irpf = IRPF.QUINCE;
+        } else {
+            this.irpf = IRPF.VENTIUNO;
+        }
+        this.casado = casadoRandom();
+        this.numHijos = hijosRandom();
     }
 
     // Constructor
@@ -51,6 +62,29 @@ public class Empleado {
     }
 
     // Métodos
+    public static double sueldoRandom() {
+        return rd.nextDouble(1100, 1501);
+    }
+
+    public static double horasRandom() {
+        return rd.nextDouble(30, 51);
+    }
+
+    public static boolean casadoRandom() {
+        return rd.nextBoolean();
+    }
+
+    public static int hijosRandom() {
+        return rd.nextInt(1, 10);
+    }
+
+    public static String listaNombres(String[] nombre) {
+        String listaNombres;
+        int numRd = rd.nextInt(0, 9 + 1);
+        listaNombres = nombre[numRd];
+        return listaNombres;
+    }
+
     public double calculo(int horas) {
         return this.cantidadAbonarHoras * horas;
     }
@@ -134,15 +168,16 @@ public class Empleado {
     // ToString
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("#.##");
         StringBuilder sb = new StringBuilder();
         sb.append("Empleado{");
-        sb.append("nombre=").append(nombre);
-        sb.append(", nif=").append(nif);
-        sb.append(", sueldoBase=").append(sueldoBase);
-        sb.append(", cantidadAbonarHoras=").append(cantidadAbonarHoras);
-        sb.append(", irpf=").append(irpf);
-        sb.append(", casado=").append(casado);
-        sb.append(", numHijos=").append(numHijos);
+        sb.append("nombre= ").append(nombre);
+        sb.append(", nif= ").append(nif);
+        sb.append(", sueldoBase= ").append(df.format(sueldoBase));
+        sb.append(", cantidadAbonarHoras= ").append(df.format(cantidadAbonarHoras));
+        sb.append(", irpf= ").append(irpf);
+        sb.append(", casado= ").append(casado);
+        sb.append(", numHijos= ").append(numHijos);
         sb.append('}');
         return sb.toString();
     }

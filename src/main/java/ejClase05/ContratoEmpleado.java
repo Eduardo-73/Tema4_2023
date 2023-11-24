@@ -4,6 +4,8 @@
  */
 package ejClase05;
 
+import java.util.Random;
+
 /**
  *
  * @author edu
@@ -11,7 +13,7 @@ package ejClase05;
 public class ContratoEmpleado {
 
     public static void main(String[] args) {
-
+        Random rd = new Random();
         // Creamos el objeto Empleado
         Empleado e1 = null;
         try {
@@ -20,7 +22,7 @@ public class ContratoEmpleado {
         } catch (IllegalArgumentException iae) {
             System.out.println("El IRPF no es válido, el objeto no se crea");
         }
-
+        System.out.println("Empleado 1º");
         System.out.println(e1);
 
         System.out.println("Cálculo horas extra: " + e1.calculo(10));
@@ -30,7 +32,7 @@ public class ContratoEmpleado {
 
         Empleado e2 = new Empleado("Pepa", "281478935S", 2500,
                 14, IRPF.OCHO, true, 1);
-
+        System.out.println("Empleado 2º");
         System.out.println("Cálculo horas extra: "
                 + MetodosEstaticos.calculo(e2, 5));
         System.out.println("Cálculo IRPF "
@@ -40,5 +42,17 @@ public class ContratoEmpleado {
         System.out.println("Neto de e1 "
                 + MetodosEstaticos.sueldoNeto(e2, 5));
 
+        System.out.println("Empleado 3º");
+        Empleado e3 = new Empleado();
+        System.out.println(e3);
+
+        System.out.println("Empleados Aleatorios");
+        Empleado[] arrayEmpleado = new Empleado[rd.nextInt(0,5)];
+        for (int i = 0; i < arrayEmpleado.length; i++) {
+            arrayEmpleado[i] = new Empleado();
+        }
+        for (int i = 0; i < arrayEmpleado.length; i++) {
+            System.out.println(arrayEmpleado[i]);
+        }
     }
 }
